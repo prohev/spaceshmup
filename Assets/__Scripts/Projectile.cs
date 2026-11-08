@@ -57,7 +57,7 @@ public class Projectile : MonoBehaviour
     {
         _type = eType;
         WeaponDefinition def = Main.GetWeaponDefinition(_type);
-        if (rend != null && def != null) 
+        if (rend != null && def == null && gameObject.tag == "ProjectileHero") 
         {
             rend.material.color = def.projectileColor;
         }

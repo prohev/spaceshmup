@@ -76,7 +76,13 @@ public class Enemy : MonoBehaviour
     {
         GameObject go = Instantiate(enemyProjectilePrefab, transform.position, Quaternion.identity);
         
-        // Give it downward velocity
+        // ADD THESE LINES: Set the projectile type to Blaster
+        Projectile p = go.GetComponent<Projectile>();
+        if (p != null)
+        {
+            p.type = WeaponType.blaster; 
+        }
+
         Rigidbody rb = go.GetComponent<Rigidbody>();
         if (rb != null)
         {

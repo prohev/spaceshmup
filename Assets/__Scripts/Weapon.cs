@@ -141,8 +141,26 @@ public class Weapon : MonoBehaviour
                 break;
 
             case WeaponType.phaser:
+                // 1. Shoot the normal wave
                 p = MakeProjectile();
-                if (p != null) p.rigid.velocity = vel;
+                if (p != null) 
+                {
+                    p.rigid.velocity = vel; 
+                }
+                
+                // 2. Shoot the inverted (-sin) wave
+                p = MakeProjectile();
+                if (p != null) 
+                {
+                    p.rigid.velocity = vel;
+                    
+                    // Flip the sine wave on the second bullet
+                    ProjectileSine sineScript = p.GetComponent<ProjectileSine>();
+                    if (sineScript != null) 
+                    {
+                        sineScript.waveMultiplier = -1f;
+                    }
+                }
                 break;
 
             // ADDED MISSILE CASE
