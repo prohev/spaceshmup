@@ -19,6 +19,10 @@ public class Enemy : MonoBehaviour
     public float damageDoneTime; //Time to stop showing damage
     public bool notifiedOfDestruction = false; //Will be used later
 
+    [Header("Set in Inspector: Enemy Shooting")]
+    public GameObject enemyProjectilePrefab; // Drag your red prefab here
+    private float nextFireTime;
+
     protected BoundsCheck bndCheck;
 
     void Awake()
@@ -59,7 +63,28 @@ public class Enemy : MonoBehaviour
             //We're off the bottom, so destroy this GameObject
             Destroy(gameObject);
         }
+
+        // --- ENEMY SHOOTING LOGIC ---
+        if (enemyProjectilePrefab != null && Time.time > nextFireTime && bndCheck.isOnScreen)
+        {
+            Fire();
+            // Add a little randomness so they don't all fire in perfect sync
+            nextFireTime = Time.time + fireRate + Random.Range(-0.1f, 0.1f);
+        }
     }
+    void Fire()
+    {
+        GameObject go = Instantiate(enemyProjectilePrefab, transform.position, Quaternion.identity);
+        
+        // Give it downward velocity
+        Rigidbody rb = go.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.velocity = Vector3.down * 15f; 
+        }
+    }
+
+
     public virtual void Move()
     {
         Vector3 tempPos = pos;

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3130482290713729651}
   m_Layer: 0
   m_Name: Enemy_3
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   fireRate: 0.3
-  health: 10
+  health: 5
   score: 100
   showDamageDuration: 0.1
   powerUpDropChance: 0.75
@@ -88,6 +88,7 @@ MonoBehaviour:
   showingDamage: 0
   damageDoneTime: 0
   notifiedOfDestruction: 0
+  enemyProjectilePrefab: {fileID: 0}
   lifeTime: 5
   points: []
   birthTime: 0

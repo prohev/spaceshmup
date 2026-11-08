@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -5627393921992448891}
   m_Layer: 0
   m_Name: Enemy_1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,6 +74,7 @@ MonoBehaviour:
   showingDamage: 0
   damageDoneTime: 0
   notifiedOfDestruction: 0
+  enemyProjectilePrefab: {fileID: 0}
   waveFrequency: 2
   waveWidth: 4
   waveRotY: 45

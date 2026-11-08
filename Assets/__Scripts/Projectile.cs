@@ -9,20 +9,22 @@ public class Projectile : MonoBehaviour
 
     [Header("Set Dynamically")]
     public Rigidbody rigid;
+    public float speed = 20f; // Added so derived classes can use it
+
     [SerializeField]
     private WeaponType _type;
 
-    //This public property masks the field _type and takes action when it is set
     public WeaponType type
     {
-        get
-        {
-            return (_type);
-        }
-        set
-        {
-            SetType(value);
-        }
+        get { return _type; }
+        set { SetType(value); }
+    }
+
+    // Added a pos property just like in Enemy.cs
+    public Vector3 pos
+    {
+        get { return transform.position; }
+        set { transform.position = value; }
     }
 
     void Awake()
@@ -31,22 +33,33 @@ public class Projectile : MonoBehaviour
         rend = GetComponent<Renderer>();
         rigid = GetComponent<Rigidbody>();
     }
+
     void Update()
     {
-        if (bndCheck.offUp)
+        Move(); // Call the virtual Move method
+
+        // Check bounds based on who is shooting
+        if (bndCheck != null)
         {
-            Destroy(gameObject);
+            if (gameObject.tag == "ProjectileHero" && bndCheck.offUp)
+                Destroy(gameObject);
+            else if (gameObject.tag == "ProjectileEnemy" && bndCheck.offDown)
+                Destroy(gameObject);
+            else if (bndCheck.offLeft || bndCheck.offRight)
+                Destroy(gameObject);
         }
     }
-    ///<summary>
-    ///Sets the _type private field and colors this projectile to match the
-    /// WeaponDefinition.
-    ///</summary>
+
+    // Virtual method that base projectiles don't need to use (physics handles it)
+    public virtual void Move() { }
+
     public void SetType(WeaponType eType)
     {
-        //Set the _type
         _type = eType;
         WeaponDefinition def = Main.GetWeaponDefinition(_type);
-        rend.material.color = def.projectileColor;
+        if (rend != null && def != null) 
+        {
+            rend.material.color = def.projectileColor;
+        }
     }
 }

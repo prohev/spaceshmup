@@ -14,6 +14,7 @@ public class Hero : MonoBehaviour
     public float gameRestartDelay = 2f;
     public GameObject projectilePrefab;
     public float projectileSpeed = 40;
+    public int missileAmmo = 5;
     public Weapon[] weapons;
 
     [Header("Set Dynamically")]

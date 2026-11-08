@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6582350274117851738}
   m_Layer: 0
   m_Name: Enemy_2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,6 +89,7 @@ MonoBehaviour:
   showingDamage: 0
   damageDoneTime: 0
   notifiedOfDestruction: 0
+  enemyProjectilePrefab: {fileID: 0}
   sinEccentricity: 0.6
   lifeTime: 10
   p0: {x: 0, y: 0, z: 0}
